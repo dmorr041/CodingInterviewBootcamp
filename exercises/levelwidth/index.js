@@ -11,6 +11,50 @@
 // 4       5
 // Answer: [1, 3, 2]
 
-function levelWidth(root) {}
+// My solution
+function levelWidth(root) {
+	if (!root) {
+		return [0];
+	}
+
+	const arr = [root, 'EOL'];
+	const counters = [0];
+
+	while(arr.length > 1) {
+		const node = arr.shift();
+
+		if (node === 'EOL') {
+			arr.push(node);
+			counters.push(0);
+		} else {
+			if (node.children.length > 0) {
+				arr.push(...node.children);
+			}
+			counters[counters.length - 1]++;
+		}
+	}
+
+	return counters;
+}
+
+// Course solution
+// function levelWidth(root) {
+// 	const arr = [root, 's'];
+// 	const counters = [0];
+//
+// 	while(arr.length > 1) {
+// 		const node = arr.shift();
+//
+// 		if (node === 's') {
+// 			counters.push(0);
+// 			arr.push(node);
+// 		} else {
+// 			arr.push(...node.children);
+// 			counters[counters.length - 1]++;
+// 		}
+// 	}
+//
+// 	return counters;
+// }
 
 module.exports = levelWidth;
