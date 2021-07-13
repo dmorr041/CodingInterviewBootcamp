@@ -39,7 +39,7 @@ class Tree {
 
 		while(arr.length > 0) {
 			node = arr.shift();
-			const children = node.children || [];
+			const children = node.children || [];	// You forgot that the Node children property is initialized to []
 			arr.push(...children);
 			fn(node);
 		}
@@ -54,6 +54,16 @@ class Tree {
 	// 		fn(node);
 	// 	}
 	// }
+
+	// My Solution and Also Course Solution
+	traverseDF(fn) {
+		const arr = [this.root];
+		while(arr.length) {
+			const node = arr.shift();
+			arr.unshift(...node.children);
+			fn(node);
+		}
+	}
 }
 
 
